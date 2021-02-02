@@ -1,68 +1,61 @@
-<?php echo $this->HTML->css('style.css');?>
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface[]|\Cake\Collection\CollectionInterface $properties
+ * @var \Cake\Datasource\EntityInterface[]|\Cake\Collection\CollectionInterface $products
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Property'), ['action' => 'add']) ?></li>
-        <ul>
-        <li style="border:1px solid white;"><?= $this->Html->link(__('Logout')
-          ,['controller' => '../users', 'action' => 'login']) ?></li>
-    </ul>
-</nav>
-<div class="properties index large-9 medium-8 columns content">
-    <h3><?= __('Properties') ?></h3>
-    <div class='col-md-4'>
-<div style="margin-right:40%;">
-    <form action="<?php ['controller' =>'Search','action' => 'index'] ?> " method="get">
-   
+
+<?= $this->Html->css('nav.css') ?>
+
+
+<div class="header">
+<h3 style="background-color:#04b704; color:black; padding:10px;"><?= __('Properties') ?>
+    <ul style="display:flex; float:right; margin-right:5%;list-style-type:none;">
+        <li style="margin-right:0px; background-color:#04b704; padding:10px; color:black;"><?= $this->Html->link(__('New Product'), ['action' => 'add']) ?></li>
+        <li style="margin-left:50px; background-color:#04b704; padding:10px; color:black;"><?= $this->Html->link(__('List Categories'), ['controller' => 'Categories', 'action' => 'index']) ?></li>
+        <li style="margin-left:50px; background-color:#04b704; padding:10px; color:black;"><?= $this->Html->link(__('New Category'), ['controller' => 'Categories', 'action' => 'add']) ?></li>
+        <li style="margin-left:50px; background-color:#04b704; padding:10px; color:black;"><?= $this->Html->link(__('Log out'), ['controller' => '../users', 'action' => 'login']) ?></li>
+    </ul></h3>
+</div>
+<body class="background">
+<div class="products index large-9 medium-8 columns content">
+    <center>
+        <div class='col-md-4' style="margin-left:40%;">
+    <form action="<?php echo $this->url->build(['action'=>'search']) ?>" method="get">
         <div class ="input-group">
-            <input type="search" name="q" class="form-control"/>
+            <input type="search" name="q" class="form-control" placeholder="Search">
             <div class="input-group-prepend">
                 <button class="btn btn-primary input -group-text" type="submit">search</button>
-            </div> </div>
+            </div>
         </div>        
 </form>
-
+</center>
 </div>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('Name') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('Image') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('Price') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($properties as $property): ?>
-            <tr>
-                <td><?= $this->Number->format($property->id) ?></td>
-                <td><?= h($property->Name) ?></td>
-                <td><?= $this->Html->image( $property->Image, ['border' => '0', 'data-src' => $property->image, 'class' => 'img-responsive']); ?></td>
-                <td><?= h($property->Price) ?></td>
-                <td class="actions">
+    <div class="row">
+    <?php foreach ($properties as $property): ?>
+  <div style="width:20%;display:inline-block;color:white; margin-left:10%;">
+<center>
+                
+                <div class="" style="padding:0px 0px 0px 20px">
+                <span style="color: #000;"><?php echo $property->Name; ?></span>
+                <?= $this->Html->image( $property->Image, ['border' => '0', 'data-src' => $property->Image, 'class' => 'imag']); ?></div>
+                <div class=""><?= $this->Html->Link(__($property->name),['action' => 'view',$property->id]) ?></div>
+               
+                <div class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $property->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $property->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $property->id], ['confirm' => __('Are you sure you want to delete # {0}?', $property->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
+                </div>
+                </center>      
+ 
+  </div>
+  
+  <?php endforeach; ?>
+ 
 </div>
+
+</div>
+</body>
+<footer style="background-color:#6b6b6b; margin-top:100px;">
+    JAWAB HA
+</footer>

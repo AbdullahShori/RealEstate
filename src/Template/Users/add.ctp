@@ -19,6 +19,7 @@
                 echo $this->Form->control('Name');
                 echo $this->Form->control('Email');
                 echo $this->Form->control('Password');
+                echo $this->Form->control('Role');
             ?>
         <?= $this->Html->link(__('Click Here to Login'),['controller' => 'Users','action' => 'login']) ?>
         <?= $this->Form->button(__('Register')) ?>

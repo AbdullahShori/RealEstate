@@ -17,16 +17,17 @@ class PropertiesController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function search() {
-        $obj = '';
-        if (!empty($this->data)) {
-           $obj  = $this->data['Location']['Procurar'];
-           $opts  = array(
-               'conditions' => array('Location.Procurar' => $obj)
-           );
-        }
-        $this->set('obj', $obj); // so the keyword is saved. Can also get it via $this->data
-     }
+    public function search()
+    {
+        $search = $this->request->getQuery('q');
+		$properties = $this->Properties->find()
+        ->where([
+            'Name like' => '%'.$search.'%'
+        ]);
+        $this->set('properties',$properties);
+        $this->set('search',$search);
+	}
+
      
     public function index()
     {
